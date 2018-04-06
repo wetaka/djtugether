@@ -2,8 +2,10 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from tugether.models import User, Event, Category, Comment
-from tugether.serializers import UserSerializer, EventSerializer, CategorySerializable, CommentSerializer
+from tugether.models import User, Event, Comment, Category
+from tugether.serializers import UserSerializer, EventSerializer, CommentSerializer, CommentSerializer
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import JSONParser
 
 
 # Create your views here.
@@ -19,7 +21,11 @@ def user_list(request):
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
+        print('1. test: post request')
+        print(request)
         data = JSONParser().parse(request)
+        print('2. test: post request')
+        print(data)
         serializer = UserSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -48,10 +54,22 @@ def user_detail(request, pk):
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
         user.delete()
         return HttpResponse(status=204)
 
+@csrf_exempt
+@parser_classes((JSONParser,))
+def login(request):
+    if request.method == 'POST':   
+        try:
+            data = JSONParser().parse(request)
+            User.objects.get(userid=data['userid'], firstname=data['firstname'])
+            token = data['userid'] + 'xxxxx' + data['firstname'] + 'yyyyy'
+            return JsonResponse({'token': token}, status=201)
+        except User.DoesNotExist:
+            return HttpResponse(status=401)
+
+    
 @csrf_exempt
 def event_list(request):
     """
@@ -95,6 +113,8 @@ def event_detail(request, pk):
     elif request.method == 'DELETE':
         event.delete()
         return HttpResponse(status=204)
+
+
 
 @csrf_exempt
 def comment_list(request):
