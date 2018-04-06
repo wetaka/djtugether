@@ -1,0 +1,219 @@
+[
+  {
+    "model": "tugether.user",
+    "pk": 1,
+    "fields": {
+      "userid": "5709650278",
+      "firstname": "Wetaka",
+      "lastname": "Wasakornkhajonyot",
+      "major": "Computer Science",
+      "department": "Science and Technology",
+      "nation": "Thai",
+      "title": "Miss",
+      "age": 21,
+      "year": "4",
+      "active": true
+    }
+  },
+  {
+    "model": "tugether.user",
+    "pk": 2,
+    "fields": {
+      "userid": "5709650179",
+      "firstname": "Phatwarintara",
+      "lastname": "Wongchathong",
+      "major": "Math",
+      "department": "Science and Technology",
+      "nation": "Thai",
+      "title": "Miss",
+      "age": 22,
+      "year": "3",
+      "active": true
+    }
+  },
+  {
+    "model": "tugether.event",
+    "pk": 1,
+    "fields": {
+      "topic": "Freak Out",
+      "posterpic": "l",
+      "createdate": "2018-03-26T04:03:01.559Z",
+      "createby": 1,
+      "join": [1],
+      "updatedate":"2018-03-26T04:03:01.559Z",
+      "startdate":"2018-03-26T04:03:01.559Z",
+      "enddate":"2018-03-26T04:03:01.559Z",
+      "eventstdate":"2018-03-26T04:03:01.559Z",
+      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "active": true,
+      "limited": 300,
+      "location": "บร.5",
+      "approve": "2",
+      "bcapprove": "",
+      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "facebook": "Freakout page",
+      "line": "",
+      "web": "",
+      "phone": "",
+      "hashtag": "#Stageplay #ละครเวที"
+
+    }
+  },
+  {
+    "model": "tugether.event",
+    "pk": 2,
+    "fields": {
+      "topic": "CU-TU traditional football",
+      "posterpic": "l",
+      "createdate": "2018-03-26T04:03:01.559Z",
+      "createby": 1,
+      "join": [1],
+      "updatedate":"2018-03-26T04:03:01.559Z",
+      "startdate":"2018-03-26T04:03:01.559Z",
+      "enddate":"2018-03-26T04:03:01.559Z",
+      "eventstdate":"2018-03-26T04:03:01.559Z",
+      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "active": true,
+      "limited": 4000,
+      "location": "สนามศุภชลาศัย",
+      "approve": "2",
+      "bcapprove": "",
+      "description": "งานฟุตบอลประเพณี ค่าบัตรราคา 100,200,400 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "facebook": "CUTU football",
+      "line": "",
+      "web": "",
+      "phone": "",
+      "hashtag": "#cututraditional#football#ฟุตบอลประเพณี"
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 1,
+    "fields": {
+      "categoryname": "Arts and crafts",
+      "categorydetails": "การฝีมือและศิลปหัตถกรรม",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 2,
+    "fields": {
+      "categoryname": "Games, sport and track and field’s",
+      "categorydetails": "เกมส์ กีฬา และกรีฑา",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 3,
+    "fields": {
+      "categoryname": "Music",
+      "categorydetails": "ดนตรีและร้องเพลง",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 4,
+    "fields": {
+      "categoryname": "Drama",
+      "categorydetails": "ละครและภาพยนตร์ง",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 5,
+    "fields": {
+      "categoryname": "Hobbies",
+      "categorydetails": "งานอดิเรก",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 6,
+    "fields": {
+      "categoryname": "Social activities",
+      "categorydetails": "กิจกรรมทางสังคม",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 7,
+    "fields": {
+      "categoryname": "Dance",
+      "categorydetails": "เต้นรำ ฟ้อนรำ",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 8,
+    "fields": {
+      "categoryname": "Outdoor activities",
+      "categorydetails": "กิจกรรมนอกเมือง",
+      "active": true
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 9,
+    "fields": {
+      "categoryname": "Field trip",
+      "categorydetails": "ทัศนศึกษา",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 10,
+    "fields": {
+      "categoryname": "Exhibitions",
+      "categorydetails": "นิทรรศการ",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 11,
+    "fields": {
+      "categoryname": "Voluntary Recreation",
+      "categorydetails": "กิจกรรมอาสาสมัคร",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  },
+  {
+    "model": "tugether.category",
+    "pk": 12,
+    "fields": {
+      "categoryname": "Science and Technologyn",
+      "categorydetails": "กิจกรรมวิทยาศาสตร์และเทคโนโลยี",
+      "active": true,
+      "userid": [1],
+      "eventid": [1]
+    }
+  }
+]
