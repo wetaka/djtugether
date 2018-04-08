@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from tugether.models import User, Event, Comment, Category
-from tugether.serializers import UserSerializer, EventSerializer, CommentSerializer, CommentSerializer
+from tugether.serializers import UserSerializer, EventSerializer, CommentSerializer, CategorySerializer
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import JSONParser
 
@@ -57,17 +57,29 @@ def user_detail(request, pk):
         user.delete()
         return HttpResponse(status=204)
 
+# @csrf_exempt
+# @parser_classes((JSONParser,))
+# def login(request):
+#     if request.method == 'POST':   
+#         try:
+#             data = JSONParser().parse(request)
+#             User.objects.get(userid=data['userid'], firstname=data['firstname'])
+#             token = data['userid'] + 'xxxxx' + data['firstname'] + 'yyyyy'
+#             return JsonResponse({'token': token}, status=201)
+#         except User.DoesNotExist:
+#             return HttpResponse(status=401)
+
+
 @csrf_exempt
 @parser_classes((JSONParser,))
-def login(request):
-    if request.method == 'POST':   
+def check_login(request, userid):
+    if request.method == 'GET':
         try:
-            data = JSONParser().parse(request)
-            User.objects.get(userid=data['userid'], firstname=data['firstname'])
-            token = data['userid'] + 'xxxxx' + data['firstname'] + 'yyyyy'
-            return JsonResponse({'token': token}, status=201)
+            user = User.objects.get(userid=userid)
+            return HttpResponse(status=200)
         except User.DoesNotExist:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
+
 
     
 @csrf_exempt
@@ -194,7 +206,7 @@ def category_detail(request, pk):
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = CategorySerializer(event, data=data)
+        serializer = CategorySerializer(category, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)

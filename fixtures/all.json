@@ -124,7 +124,7 @@
     "pk": 4,
     "fields": {
       "categoryname": "Drama",
-      "categorydetails": "ละครและภาพยนตร์ง",
+      "categorydetails": "ละครและภาพยนตร์",
       "active": true,
       "userid": [1],
       "eventid": [1]
@@ -209,7 +209,7 @@
     "model": "tugether.category",
     "pk": 12,
     "fields": {
-      "categoryname": "Science and Technologyn",
+      "categoryname": "Science and Technology",
       "categorydetails": "กิจกรรมวิทยาศาสตร์และเทคโนโลยี",
       "active": true,
       "userid": [1],

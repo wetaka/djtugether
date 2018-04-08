@@ -17,12 +17,12 @@ class EventSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        field = ('id','eventid','createby','createdate','active','details')
+        fields = ('id','eventid','createby','createdate','active','details')
 
-class CategorySerializable(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        field = ('id','categoryname','categorydetails','userid','eventid','active')
+        fields = ('id','categoryname','categorydetails','userid','eventid','active')
 
 # class Category(models.Model):
 #     categoryname = models.CharField(max_length=100)
