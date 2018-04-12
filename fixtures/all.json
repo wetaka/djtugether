@@ -1,9 +1,8 @@
 [
   {
     "model": "tugether.user",
-    "pk": 1,
+    "pk": "5709650278",
     "fields": {
-      "userid": "5709650278",
       "firstname": "Wetaka",
       "lastname": "Wasakornkhajonyot",
       "major": "Computer Science",
@@ -17,9 +16,8 @@
   },
   {
     "model": "tugether.user",
-    "pk": 2,
+    "pk": "5709650179",
     "fields": {
-      "userid": "5709650179",
       "firstname": "Phatwarintara",
       "lastname": "Wongchathong",
       "major": "Math",
@@ -38,8 +36,8 @@
       "topic": "Freak Out",
       "posterpic": "l",
       "createdate": "2018-03-26T04:03:01.559Z",
-      "createby": 1,
-      "join": [1],
+      "createby": "5709650278",
+      "join": ["5709650179"],
       "updatedate":"2018-03-26T04:03:01.559Z",
       "startdate":"2018-03-26T04:03:01.559Z",
       "enddate":"2018-03-26T04:03:01.559Z",
@@ -66,8 +64,8 @@
       "topic": "CU-TU traditional football",
       "posterpic": "l",
       "createdate": "2018-03-26T04:03:01.559Z",
-      "createby": 1,
-      "join": [1],
+      "createby": "5709650278",
+      "join": ["5709650179"],
       "updatedate":"2018-03-26T04:03:01.559Z",
       "startdate":"2018-03-26T04:03:01.559Z",
       "enddate":"2018-03-26T04:03:01.559Z",
@@ -93,7 +91,7 @@
       "categoryname": "Arts and crafts",
       "categorydetails": "การฝีมือและศิลปหัตถกรรม",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -104,7 +102,7 @@
       "categoryname": "Games, sport and track and field’s",
       "categorydetails": "เกมส์ กีฬา และกรีฑา",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -115,7 +113,7 @@
       "categoryname": "Music",
       "categorydetails": "ดนตรีและร้องเพลง",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -126,7 +124,7 @@
       "categoryname": "Drama",
       "categorydetails": "ละครและภาพยนตร์",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -137,7 +135,7 @@
       "categoryname": "Hobbies",
       "categorydetails": "งานอดิเรก",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -148,7 +146,7 @@
       "categoryname": "Social activities",
       "categorydetails": "กิจกรรมทางสังคม",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -159,7 +157,7 @@
       "categoryname": "Dance",
       "categorydetails": "เต้นรำ ฟ้อนรำ",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -179,7 +177,7 @@
       "categoryname": "Field trip",
       "categorydetails": "ทัศนศึกษา",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -190,7 +188,7 @@
       "categoryname": "Exhibitions",
       "categorydetails": "นิทรรศการ",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -201,7 +199,7 @@
       "categoryname": "Voluntary Recreation",
       "categorydetails": "กิจกรรมอาสาสมัคร",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   },
@@ -212,7 +210,7 @@
       "categoryname": "Science and Technology",
       "categorydetails": "กิจกรรมวิทยาศาสตร์และเทคโนโลยี",
       "active": true,
-      "userid": [1],
+      "userid": ["5709650278"],
       "eventid": [1]
     }
   }

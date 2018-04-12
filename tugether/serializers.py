@@ -5,7 +5,7 @@ from tugether.models import User, Event, Comment, Category
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active')
+        fields = ('userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active')
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

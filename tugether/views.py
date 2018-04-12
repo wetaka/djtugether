@@ -30,6 +30,8 @@ def user_list(request):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+        print("Error jaaaa :")
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
@@ -210,6 +212,9 @@ def category_detail(request, pk):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+        print("Error jaaaa :")
+        print(data)
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':

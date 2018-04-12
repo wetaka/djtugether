@@ -4,7 +4,7 @@ from django.core.validators import MaxValueValidator
 # Create your models here.
 
 class User(models.Model):
-    userid = models.CharField(max_length=20)
+    userid = models.CharField(max_length=20, primary_key=True)
     firstname = models.CharField(max_length=30)
     lastname = models.CharField(max_length=30)
     major = models.CharField(max_length=100)
@@ -18,7 +18,7 @@ class User(models.Model):
 class Event(models.Model):
     topic = models.CharField(max_length=200)
     join = models.ManyToManyField(User)
-    createby = models.IntegerField(default=0)
+    createby = models.CharField(max_length=20)
     location = models.CharField(max_length=200)
     approve = models.CharField(max_length=4)
     description = models.CharField(max_length=500)
