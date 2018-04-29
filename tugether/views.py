@@ -127,10 +127,13 @@ def get_join(request, eventid):
 @csrf_exempt
 @parser_classes((JSONParser,))
 @api_view(['GET'])
-def get_searchevent(request, searchword ,categoryid):
+def get_searchevent(request, categoryid):
     print("DateTime jaaaaaaaaa ")
     if request.method == 'GET':
         try:
+            query_string = request.GET
+           
+
             date_now = datetime(2010,1,26,0,0,0)
             date_modified = datetime.now()
             print(date_modified)
@@ -141,61 +144,83 @@ def get_searchevent(request, searchword ,categoryid):
             print("DateTime jaaaaaaaaa ")
             print("DateTime jaaaaaaaaa ")
             print("DateTime jaaaaaaaaa ")
-            category = Category.objects.all().filter(categoryname__icontains=searchword ).values_list('pk', flat=True)
-            print(category)
-
-            if categoryid == 0 :
-                event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now).distinct()
-            else :   
-                event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid).distinct()
-           
-            print(event)
-
             
+            if 'searchword' in query_string :
+                searchword = query_string['searchword']
+                category = Category.objects.all().filter(categoryname__icontains=searchword ).values_list('pk', flat=True)
+                print(category)
 
-            # for et in event :
-                # if et.find(category)
-                # print("MMMMMMMMM")
-                # print(et['topic'])
+                if categoryid == 0 :
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now).distinct()
+                else :   
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid).distinct()
+            
+                print(event)
+                # for et in event :
+                    # if et.find(category)
+                    # print("MMMMMMMMM")
+                    # print(et['topic'])
+                serializer = EventSerializer(event, many=True)
+                category_serializer = list(category)
+                print(serializer.data)
+                print(category_serializer)
+                # print(category)
+                for et in serializer.data :
+                    et['total'] = 0
 
-            serializer = EventSerializer(event, many=True)
-            category_serializer = list(category)
+                    if et['topic'].find(searchword) != -1 :
+                        et['total'] = et['total'] + 100
 
-            print(serializer.data)
-            print(category_serializer)
-            # print(category)
-            for et in serializer.data :
-                et['total'] = 0
+                    etsplit = et['hashtag'].split('#')
+                    for  sp in etsplit :
+                        if sp.find(searchword) != -1 :
+                            et['total'] = et['total'] + 30
 
-                if et['topic'].find(searchword) != -1 :
-                    et['total'] = et['total'] + 100
+                    if et['description'].find(searchword) != -1 :
+                        et['total'] = et['total'] + 40
+                                    
+                    datetable = datetime(*time.strptime(et['eventenddate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
+                    diff = datetable - date_now
+                    # # b = ((diff.total_seconds() /60) / 60)/24
+                    print(diff)
+                    # a = diff.days * (-5)
+                    et['total'] = et['total'] + (diff.days * (-5))
 
-                etsplit = et['hashtag'].split('#')
-                for  sp in etsplit :
-                    if sp.find(searchword) != -1 :
-                        et['total'] = et['total'] + 30
-
-                if et['description'].find(searchword) != -1 :
-                    et['total'] = et['total'] + 40
+                    for ct in category_serializer :
+                        print(et['categoryid'])
+                        for ec in et['categoryid'] :
+                            if ct == ec :
+                                et['total'] = et['total'] + 25    
                                 
-                datetable = datetime(*time.strptime(et['eventenddate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
-                diff = datetable - date_now
-                # # b = ((diff.total_seconds() /60) / 60)/24
-                print(diff)
-                # a = diff.days * (-5)
-                et['total'] = et['total'] + (diff.days * (-5))
+                result = sorted(serializer.data, key=lambda data : data['total'], reverse=True)     
+                max_size = len(result)
+                print('--------------------------------------------')
+                print(max_size)
+            
+            else :
+                if categoryid == 0 :
+                    event = Event.objects.all().filter(eventenddate__gt=date_now).distinct()
+                else :   
+                    event = Event.objects.all().filter(eventenddate__gt=date_now, categoryid = categoryid).distinct()
 
-                for ct in category_serializer :
-                    print(et['categoryid'])
-                    for ec in et['categoryid'] :
-                        if ct == ec :
-                            et['total'] = et['total'] + 25    
-                            
-            result = sorted(serializer.data, key=lambda data : data['total'], reverse=True)     
-            max_size = len(result)
-            print('--------------------------------------------')
-            print(max_size)
-            query_string = request.GET
+                serializer = EventSerializer(event, many=True)
+                
+                print(serializer.data)
+                
+                for et in serializer.data :
+                    et['total'] = 0
+                                    
+                    datetable = datetime(*time.strptime(et['eventenddate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
+                    diff = datetable - date_now
+                    print(diff)
+                    et['total'] = et['total'] + (diff.days * (-5))  
+                                
+                result = sorted(serializer.data, key=lambda data : data['total'], reverse=True)     
+                max_size = len(result)
+                print('--------------------------------------------')
+                print(max_size)
+                       
+
             if 'st' in query_string  and 'ed' in query_string:
                 st = int(query_string['st'])
                 ed = int(query_string['ed'])
