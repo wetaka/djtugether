@@ -5,12 +5,12 @@ from tugether.models import User, Event, Comment, Category
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active')
+        fields = ('userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active','categoryid' )
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('id','topic', 'join', 'createby', 'location', 'approve','description',
+        fields = ('id','topic', 'createby','join','categoryid', 'location', 'approve','description',
         'facebook','line','web','phone','hashtag','bcapprove','posterpic','createdate',
         'updatedate','startdate','enddate','eventstdate','eventenddate','active','limited')
 
@@ -22,7 +22,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id','categoryname','categorydetails','userid','eventid','active')
+        fields = ('id','categoryname','categorydetails','active')
 
 # class Category(models.Model):
 #     categoryname = models.CharField(max_length=100)

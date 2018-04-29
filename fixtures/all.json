@@ -11,6 +11,7 @@
       "title": "Miss",
       "age": 21,
       "year": "4",
+      "categoryid": [2,3],
       "active": true
     }
   },
@@ -26,6 +27,7 @@
       "title": "Miss",
       "age": 22,
       "year": "3",
+      "categoryid": [1,3],
       "active": true
     }
   },
@@ -53,10 +55,12 @@
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#Stageplay #ละครเวที"
+      "hashtag": "#Stageplay #ละครเวที",
+      "categoryid": [3,5]
 
     }
   },
+ 
   {
     "model": "tugether.event",
     "pk": 2,
@@ -81,18 +85,49 @@
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#cututraditional#football#ฟุตบอลประเพณี"
+      "hashtag": "#cututraditional#football#ฟุตบอลประเพณี",
+      "categoryid": [2,3]
     }
   },
+
+  {
+    "model": "tugether.event",
+    "pk": 3,
+    "fields": {
+      "topic": "Freak Test Load Out",
+      "posterpic": "l",
+      "createdate": "2018-03-26T04:03:01.559Z",
+      "createby": "5709650179",
+      "join": ["5709650278"],
+      "updatedate":"2018-03-26T04:03:01.559Z",
+      "startdate":"2018-03-26T04:03:01.559Z",
+      "enddate":"2018-03-26T04:03:01.559Z",
+      "eventstdate":"2018-03-26T04:03:01.559Z",
+      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "active": true,
+      "limited": 300,
+      "location": "บร.5",
+      "approve": "2",
+      "bcapprove": "",
+      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "facebook": "Freakout page",
+      "line": "",
+      "web": "",
+      "phone": "",
+      "hashtag": "#Stageplay #ละครเวที",
+      "categoryid": [3,5]
+
+    }
+  },
+
   {
     "model": "tugether.category",
     "pk": 1,
     "fields": {
       "categoryname": "Arts and crafts",
       "categorydetails": "การฝีมือและศิลปหัตถกรรม",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
+     
     }
   },
   {
@@ -101,9 +136,8 @@
     "fields": {
       "categoryname": "Games, sport and track and field’s",
       "categorydetails": "เกมส์ กีฬา และกรีฑา",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
+      
     }
   },
   {
@@ -112,9 +146,7 @@
     "fields": {
       "categoryname": "Music",
       "categorydetails": "ดนตรีและร้องเพลง",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -123,9 +155,7 @@
     "fields": {
       "categoryname": "Drama",
       "categorydetails": "ละครและภาพยนตร์",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -134,9 +164,7 @@
     "fields": {
       "categoryname": "Hobbies",
       "categorydetails": "งานอดิเรก",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -145,9 +173,7 @@
     "fields": {
       "categoryname": "Social activities",
       "categorydetails": "กิจกรรมทางสังคม",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -156,9 +182,7 @@
     "fields": {
       "categoryname": "Dance",
       "categorydetails": "เต้นรำ ฟ้อนรำ",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -176,9 +200,7 @@
     "fields": {
       "categoryname": "Field trip",
       "categorydetails": "ทัศนศึกษา",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -187,9 +209,7 @@
     "fields": {
       "categoryname": "Exhibitions",
       "categorydetails": "นิทรรศการ",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -198,9 +218,7 @@
     "fields": {
       "categoryname": "Voluntary Recreation",
       "categorydetails": "กิจกรรมอาสาสมัคร",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   },
   {
@@ -209,9 +227,7 @@
     "fields": {
       "categoryname": "Science and Technology",
       "categorydetails": "กิจกรรมวิทยาศาสตร์และเทคโนโลยี",
-      "active": true,
-      "userid": ["5709650278"],
-      "eventid": [1]
+      "active": true
     }
   }
 ]

@@ -3,6 +3,14 @@ from django.core.validators import MaxValueValidator
 
 # Create your models here.
 
+class Category(models.Model):
+    
+    categoryname = models.CharField(max_length=100)
+    categorydetails = models.TextField()
+    #userid = models.ManyToManyField(User)
+    #eventid = models.ManyToManyField(Event)
+    active = models.BooleanField(default=True)
+
 class User(models.Model):
     userid = models.CharField(max_length=20, primary_key=True)
     firstname = models.CharField(max_length=30)
@@ -14,11 +22,14 @@ class User(models.Model):
     year = models.CharField(max_length=1)   
     age = models.IntegerField(validators=[MaxValueValidator(100)])
     active = models.BooleanField(default=True)
+    categoryid = models.ManyToManyField(Category)       #edit
 
 class Event(models.Model):
     topic = models.CharField(max_length=200)
-    join = models.ManyToManyField(User)
+    join = models.ManyToManyField(User, default=[])  
     createby = models.CharField(max_length=20)
+    #createby = models.ForeignKey(User, on_delete=models.CASCADE)   #edit
+    categoryid = models.ManyToManyField(Category)           #edit
     location = models.CharField(max_length=200)
     approve = models.CharField(max_length=4)
     description = models.CharField(max_length=500)
@@ -46,13 +57,9 @@ class Comment(models.Model):
     createdate = models.DateTimeField('Create Date')
     active = models.BooleanField(default=True)
     details = models.TextField()
+#   commentid = models.CharField(max_length=200)
 
-class Category(models.Model):
-    categoryname = models.CharField(max_length=100)
-    categorydetails = models.TextField()
-    userid = models.ManyToManyField(User)
-    eventid = models.ManyToManyField(Event)
-    active = models.BooleanField(default=True)
+
 
 
 

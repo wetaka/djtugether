@@ -94,6 +94,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'wetaka2539',
         'HOST': '192.168.99.100',
+        # 'HOST': '192.168.1.11',
         'PORT': '5432',
     }
 }
