@@ -65,18 +65,6 @@ def user_detail(request, pk):
         user.delete()
         return HttpResponse(status=204)
 
-# @csrf_exempt
-# @parser_classes((JSONParser,))
-# def login(request):
-#     if request.method == 'POST':   
-#         try:
-#             data = JSONParser().parse(request)
-#             User.objects.get(userid=data['userid'], firstname=data['firstname'])
-#             token = data['userid'] + 'xxxxx' + data['firstname'] + 'yyyyy'
-#             return JsonResponse({'token': token}, status=201)
-#         except User.DoesNotExist:
-#             return HttpResponse(status=401)
-
 
 @csrf_exempt
 @parser_classes((JSONParser,))
@@ -94,12 +82,8 @@ def check_login(request, userid):
 def get_yourevent(request, userid):
     if request.method == 'GET':
         try:
-            
-
             event = Event.objects.all().filter(createby=userid)
-            serializer = EventSerializer(event, many=True)            
-
-            
+            serializer = EventSerializer(event, many=True)                     
 
             result = serializer.data    
             max_size = len(result)
@@ -117,7 +101,6 @@ def get_yourevent(request, userid):
                 result = result[:ed]
             
             return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
-            # return JsonResponse(serializer.data, safe=False)
             
         except Event.DoesNotExist:
             return HttpResponse(status=404)
@@ -136,12 +119,7 @@ def get_join(request, eventid):
             print(user)
 
             user_serializer = UserSerializer(user, many=True)
-            # serializer = EventSerializer(event, many=True)
-            
-            # return JsonResponse(user_serializer.data, safe=False)
-            # return HttpResponse(status=200)
-            
-            
+                     
         except Event.DoesNotExist:
             return HttpResponse(status=404)
 
@@ -255,7 +233,7 @@ def get_searchevent(request, categoryid):
 @csrf_exempt
 @parser_classes((JSONParser,))
 @api_view(['GET'])
-def get_AutoCompleteWords(request,words ,categoryid):
+def get_autoCompleteWords(request,word ,categoryid):
     print("DateTime jaaaaaaaaa ")
     if request.method == 'GET':
         try:
@@ -282,64 +260,52 @@ def get_AutoCompleteWords(request,words ,categoryid):
                 event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid).distinct()
         
             print(event)
-            # for et in event :
-                # if et.find(category)
-                # print("MMMMMMMMM")
-                # print(et['topic'])
+
             serializer = EventSerializer(event, many=True)
             category_serializer = list(category)
             print(serializer.data)
             print(category_serializer)
             # print(category)
+
+            allwords = {}
+
             for et in serializer.data :
-                et['total'] = 0
-                et['allword'] = ['']
+                # et['total'] = 0
+                allstr = et['topic']+" "+et['description']+" "+et['hashtag']
+                splitwords = allstr.split(" ")
 
-                if et['topic'].find(searchword) != -1 :
-                    et['total'] = et['total'] + 100
-                    et['allword'] = et[''] 
-                etsplit = et['hashtag'].split('#')
-                for  sp in etsplit :
-                    if sp.find(searchword) != -1 :
-                        et['total'] = et['total'] + 30
+                print("+++++++++++++++++++++++++++++++++++++++++++++")
+                print(splitwords)
 
-                if et['description'].find(searchword) != -1 :
-                    et['total'] = et['total'] + 40
-                                
-                datetable = datetime(*time.strptime(et['eventenddate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
-                diff = datetable - date_now
-                # # b = ((diff.total_seconds() /60) / 60)/24
-                print(diff)
-                # a = diff.days * (-5)
-                et['total'] = et['total'] + (diff.days * (-5))
+                for inwords in splitwords :
+                    print(inwords)
+                    if inwords.find(word) != -1 :
+                        # print(allwords[inwords])
+                        if inwords in allwords :
+                            allwords[inwords] = allwords[inwords] + 1
+                            print("55555555555555555555555555")
+                            print(allwords[inwords])
 
-                for ct in category_serializer :
-                    print(et['categoryid'])
-                    for ec in et['categoryid'] :
-                        if ct == ec :
-                            et['total'] = et['total'] + 25    
-                            
-            result = sorted(serializer.data, key=lambda data : data['total'], reverse=True)     
-            max_size = len(result)
-            print('--------------------------------------------')
-            print(max_size)
-        
-        # else :
-                       
+                        else :
+                            allwords[inwords] = 1 
 
-            if 'st' in query_string  and 'ed' in query_string:
-                st = int(query_string['st'])
-                ed = int(query_string['ed'])
-                result = result[st : ed]
-            elif 'st' in query_string:
-                st = int(query_string['st'])
-                result = result[st:]
-            elif 'ed' in query_string:
-                ed = int(query_string['ed'])                
-                result = result[:ed]
-            
-            return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
-        except Event.DoesNotExist:
+            # print("*************************++++++++++++++++++++++++++++++++++++")
+            # print(allwords)
+
+            sorted_allwords = sorted(allwords, key=allwords.get, reverse=True)
+            # sorted_allwords = [(k, allwords[k]) for k in sorted(allwords, key=allwords.values, reverse=True)]
+            # dict.values(sorted)
+            # print("-------------------------------------------")
+            # print(sorted_allwords)
+            # print("/////////////////////////////////////////////////////////////////")
+            # print(sorted_allwords.keys())
+            result = sorted_allwords[0 : 9]
+            # print("**************************************************")
+            # print(allwords.values())
+            # print("----------------------------------------//////////////////////////////////")
+            # print(result) 
+            return JsonResponse({"data": result }, safe=False)
+        except Event.DoesNotExist: 
             return HttpResponse(status=404)
 
 @csrf_exempt
@@ -356,39 +322,17 @@ def get_upcomingevent(request, userid):
             print("DateTime jaaaaaaaaa ")
             print(datetime(2000,1,1,0,0,0))
             print("DateTime jaaaaaaaaa ")
-            # category = Category.objects.all().filter(categoryname__icontains=searchword).values_list('pk', flat=True)
-            # print(category)
-            # user = User.objects.all().filter(userid=userid).values_list('userid', flat=True)
-
-            # print(user)
 
             event = Event.objects.all().filter(join__in=[userid] ,eventenddate__gt=date_now).distinct()
 
             print(event)
-            # for et in event :
-                # if et.find(category)
-                # print("MMMMMMMMM")
-                # print(et['topic'])
-  
+           
             serializer = EventSerializer(event, many=True)
-            # category_serializer = list(category)
-        
+           
             print(serializer.data)
-            # print(category_serializer)
-            # print(category)
+           
             for et in serializer.data :
                 et['total'] = 0
-
-                # if et['topic'].find(searchword) != -1 :
-                #     et['total'] = et['total'] + 100
-
-                # etsplit = et['hashtag'].split('#')
-                # for  sp in etsplit :
-                #     if sp.find(searchword) != -1 :
-                #         et['total'] = et['total'] + 30
-
-                # if et['description'].find(searchword) != -1 :
-                #     et['total'] = et['total'] + 40
                                 
                 datetable = datetime(*time.strptime(et['eventstdate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
                 diff = datetable - date_now
@@ -398,13 +342,7 @@ def get_upcomingevent(request, userid):
                 print(diff)
                 # a = diff.days * (-5)
                 et['total'] = et['total'] + (diff.days * (-5))
-
-                # for ct in category_serializer :
-                #     print(et['categoryid'])
-                #     for ec in et['categoryid'] :
-                #         if ct == ec :
-                #             et['total'] = et['total'] + 25    
-            
+             
             
             print(serializer.data)
             result = sorted(serializer.data, key=lambda data : data['total'], reverse=True)
@@ -427,12 +365,7 @@ def get_upcomingevent(request, userid):
                 result = result[:ed]
             
             return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
-
-
-            # return JsonResponse(result , safe=False)
-            # return HttpResponse(status=200)
             
-
         except Event.DoesNotExist:
             return HttpResponse(status=404)
 

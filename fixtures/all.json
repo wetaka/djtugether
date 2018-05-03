@@ -35,7 +35,7 @@
     "model": "tugether.event",
     "pk": 1,
     "fields": {
-      "topic": "Freak Out",
+      "topic": "fam Freak Out football finny finny finny fam",
       "posterpic": "l",
       "createdate": "2018-03-26T04:03:01.559Z",
       "createby": "5709650278",
@@ -50,12 +50,12 @@
       "location": "บร.5",
       "approve": "2",
       "bcapprove": "",
-      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "description": "fam งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ freak finny finny",
       "facebook": "Freakout page",
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#Stageplay #ละครเวที",
+      "hashtag": "#Stageplay #ละครเวที #few ",
       "categoryid": [3,5]
 
     }
@@ -65,7 +65,7 @@
     "model": "tugether.event",
     "pk": 2,
     "fields": {
-      "topic": "CU-TU traditional football",
+      "topic": "CU-TU  freak traditional football finny",
       "posterpic": "l",
       "createdate": "2018-03-26T04:03:01.559Z",
       "createby": "5709650278",
@@ -80,12 +80,12 @@
       "location": "สนามศุภชลาศัย",
       "approve": "2",
       "bcapprove": "",
-      "description": "งานฟุตบอลประเพณี ค่าบัตรราคา 100,200,400 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "description": "fam fam งานฟุตบอลประเพณี ค่าบัตรราคา 100,200,400 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ freak",
       "facebook": "CUTU football",
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#cututraditional#football#ฟุตบอลประเพณี",
+      "hashtag": "#cututraditional #football #ฟุตบอลประเพณี #few",
       "categoryid": [2,3]
     }
   },
@@ -94,7 +94,7 @@
     "model": "tugether.event",
     "pk": 3,
     "fields": {
-      "topic": "Freak Test Load Out",
+      "topic": "Freak Test Load Out freak",
       "posterpic": "l",
       "createdate": "2018-03-26T04:03:01.559Z",
       "createby": "5709650179",
@@ -109,7 +109,7 @@
       "location": "บร.5",
       "approve": "2",
       "bcapprove": "",
-      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์",
+      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ football",
       "facebook": "Freakout page",
       "line": "",
       "web": "",

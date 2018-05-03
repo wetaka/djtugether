@@ -14,6 +14,7 @@ urlpatterns = [
     path('search-event/<int:categoryid>',views.get_searchevent),
     path('upcoming-event/<str:userid>',views.get_upcomingevent),
     path('past-event/<str:userid>',views.get_pastevent),
+    path('get-autowords/<str:word>/<int:categoryid>',views.get_autoCompleteWords),
 
     
     
