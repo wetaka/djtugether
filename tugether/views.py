@@ -460,6 +460,28 @@ def comment_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@csrf_exempt
+@parser_classes((JSONParser,))
+def get_comment(request, eventid):
+    if request.method == 'GET':
+        try:
+            # event = Event.objects.get(id=eventid)
+            # serializer = EventSerializer(event)
+            # print(serializer.data['join'])
+            # event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now).distinct()
+            
+            comment = Comment.objects.order_by('createdate').filter(eventid = eventid)
+            print(comment)
+            # print(user)
+            # Comment.objects.order_by('createdate')
+
+            comment_serializer = CommentSerializer(comment, many=True)
+            # print(comment_serializer.data)
+            return JsonResponse(comment_serializer.data , safe=False)     
+
+        except Event.DoesNotExist:
+            return HttpResponse(status=404)
+
 
 @csrf_exempt
 def event_list(request):
@@ -506,6 +528,52 @@ def event_detail(request, pk):
         return HttpResponse(status=204)
 
 
+# add Noti
+@csrf_exempt
+def noti_list(request):
+    """
+    List all code event, or create a new event.
+    """
+    if request.method == 'GET':
+        noti = Noti.objects.all()
+        serializer = NotiSerializer(noti, many=True)  
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = NotiSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def noti_detail(request, pk):
+    """
+    Retrieve, update or delete a code .
+    """
+    try:
+        noti = Noti.objects.get(pk=pk)
+    except Noti.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = NotiSerializer(noti)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = NotiSerializer(noti, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        event.delete()
+        return HttpResponse(status=204)
+
+# ---------------------------------------------------------------------------
 @csrf_exempt
 def comment_detail(request, pk):
     """

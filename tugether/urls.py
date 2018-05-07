@@ -16,10 +16,12 @@ urlpatterns = [
     path('past-event/<str:userid>',views.get_pastevent),
     path('get-autowords/<str:word>/<int:categoryid>',views.get_autoCompleteWords),
 
-    
+    path('noti', views.noti_list),
+    path('noti/<int:pk>', views.noti_detail),
     
     path('comment', views.comment_list),
     path('comment/<int:pk>', views.comment_detail),
+    path('comment-event/<int:eventid>',views.get_comment),
 
     path('category', views.category_list),
     path('category/<int:pk>', views.category_detail),

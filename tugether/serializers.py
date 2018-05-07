@@ -24,7 +24,13 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id','categoryname','categorydetails','active')
 
-# class Category(models.Model):
+
+# class NotiSerializer(serializers.ModelSerializer):
+#     class Meta :
+#         model = Noti
+#         fields = ('newcategory','eventucm','cmmyevent' ,'editevent','replycm','eventofcate' )
+
+#  class Category(models.Model):
 #     categoryname = models.CharField(max_length=100)
 #     categorydetails = models.TextField()
 #     userid = models.ManyToManyField(User)
