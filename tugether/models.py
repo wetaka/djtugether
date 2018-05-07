@@ -60,16 +60,16 @@ class Comment(models.Model):
     details = models.TextField()
 #   commentid = models.CharField(max_length=200)
 
-# class Noti(models.Model):
+class Noti(models.Model):
 
-#     newcategory = models.ForeignKey(Category, on_delete=models.CASCADE)
-#     eventucm = models.ForeignKey(Event, on_delete=models.CASCADE)
-#     cmmtevent = models.ForeignKey(Comment, on_delete=models.CASCADE)
-#     # editevent = models.CharField(max_length=200)
-#     # replycm = models.CharField(max_length=200)
-#     # eventofcate = models.CharField(max_length=200)
-#     header = models.CharField(max_length=200)
-#     des = models.CharField(max_length=200)
+    types = models.TextField()
+    userid = models.ForeignKey(User, on_delete=models.CASCADE)
+    # editevent = models.CharField(max_length=200)
+    # replycm = models.CharField(max_length=200)
+    # eventofcate = models.CharField(max_length=200)
+    text = models.TextField()
+    active = models.BooleanField(default=True)    
+    # des = models.CharField(max_length=200)
     
 
 

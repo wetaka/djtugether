@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from tugether.models import User, Event, Comment, Category
+from tugether.models import User, Event, Comment, Category ,Noti
 # from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,10 +25,10 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id','categoryname','categorydetails','active')
 
 
-# class NotiSerializer(serializers.ModelSerializer):
-#     class Meta :
-#         model = Noti
-#         fields = ('newcategory','eventucm','cmmyevent' ,'editevent','replycm','eventofcate' )
+class NotiSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Noti
+        fields = ('id','types','userid','text', 'active' )
 
 #  class Category(models.Model):
 #     categoryname = models.CharField(max_length=100)

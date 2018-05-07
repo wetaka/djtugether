@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from tugether.models import User, Event, Comment, Category
-from tugether.serializers import UserSerializer, EventSerializer, CommentSerializer, CategorySerializer
+from tugether.models import User, Event, Comment, Category, Noti
+from tugether.serializers import UserSerializer, EventSerializer, CommentSerializer, CategorySerializer ,NotiSerializer
 from rest_framework.decorators import parser_classes, api_view
 from rest_framework.parsers import JSONParser
 
@@ -570,7 +570,7 @@ def noti_detail(request, pk):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        event.delete()
+        noti.delete()
         return HttpResponse(status=204)
 
 # ---------------------------------------------------------------------------
