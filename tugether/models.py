@@ -64,11 +64,12 @@ class Noti(models.Model):
 
     types = models.TextField()
     userid = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    active = models.BooleanField(default=True)  
     # editevent = models.CharField(max_length=200)
     # replycm = models.CharField(max_length=200)
     # eventofcate = models.CharField(max_length=200)
-    text = models.TextField()
-    active = models.BooleanField(default=True)    
+      
     # des = models.CharField(max_length=200)
     
 
