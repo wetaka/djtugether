@@ -12,7 +12,7 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('id','topic', 'createby','join','categoryid', 'location', 'approve','description',
         'facebook','line','web','phone','hashtag','bcapprove','posterpic','createdate',
-        'updatedate','startdate','enddate','eventstdate','eventenddate','active','limited')
+        'updatedate','eventstdate','eventenddate','active','limited')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

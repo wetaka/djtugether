@@ -431,34 +431,7 @@ def get_pastevent(request, userid):
         except Event.DoesNotExist:
             return HttpResponse(status=404)
 
-@csrf_exempt
-def comment_list(request):
-    """
-    List all code user, or create a new user.
-    """
-    if request.method == 'GET':
-        comment = Comment.objects.all()
-        serializer = CommentSerializer(comment, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
-
-        data = JSONParser().parse(request)
-        
-        print("=================")
-        date_modified = datetime.now()
-        print(data)
-        print(data['createby'])
-        data['createdate'] = date_modified
-
-        print(data)
-        serializer = CommentSerializer(data=data)
-        
-
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
 @parser_classes((JSONParser,))
@@ -495,7 +468,39 @@ def event_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        date_modified = datetime.now()
+        data['createdate'] = date_modified
+        data['bcapprove'] = ""
+        data['posterpic'] = ""
+        data['updatedate'] = None
+        data['active'] = true
         serializer = EventSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def comment_list(request):
+    """
+    List all code user, or create a new user.
+    """
+    if request.method == 'GET':
+        comment = Comment.objects.all()
+        serializer = CommentSerializer(comment, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+
+        data = JSONParser().parse(request)       
+        print("=================")
+        date_modified = datetime.now()
+        print(data)
+        print(data['createby'])
+        data['createdate'] = date_modified
+        print(data)
+        serializer = CommentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
