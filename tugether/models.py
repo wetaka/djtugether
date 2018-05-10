@@ -29,26 +29,26 @@ class Event(models.Model):
     join = models.ManyToManyField(User, default=[])  
     createby = models.CharField(max_length=20)
     #createby = models.ForeignKey(User, on_delete=models.CASCADE)   #edit
-    categoryid = models.ManyToManyField(Category)           #edit
-    location = models.CharField(max_length=200)
+    categoryid = models.ManyToManyField(Category , default=[])           #edit
+    location = models.CharField(max_length=200, blank=True, null=True )
     approve = models.CharField(max_length=4)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=500 ,blank=True, null=True)
 #  commentid = models.CharField(max_length=200)
-    facebook = models.CharField(max_length=200)
-    line = models.CharField(max_length=20)
-    web = models.CharField(max_length=200)
-    phone = models.CharField(max_length=20)   
-    hashtag = models.TextField()
-    bcapprove = models.TextField()
+    facebook = models.CharField(max_length=200, blank=True, null=True)
+    line = models.CharField(max_length=20, blank=True, null=True)
+    web = models.CharField(max_length=200, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)   
+    hashtag = models.TextField(blank=True, null=True)
+    bcapprove = models.TextField(blank=True, null=True)
     posterpic = models.TextField()
     createdate = models.DateTimeField('Create Date')
-    updatedate = models.DateTimeField('Editdate Date')
+    updatedate = models.DateTimeField('Editdate Date' ,blank=True, null=True)
     # startdate = models.DateTimeField('Start Date')
     # enddate = models.DateTimeField('End Date')
     eventstdate = models.DateTimeField('Event Start Date')
     eventenddate = models.DateTimeField('Event End Date')
     active = models.BooleanField(default=True)
-    limited = models.IntegerField(validators=[MaxValueValidator(100)])
+    limited = models.IntegerField(validators=[MaxValueValidator(10000)] , blank=True, null=True)
 
 
 class Comment(models.Model):

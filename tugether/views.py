@@ -175,9 +175,7 @@ def get_searchevent(request, categoryid):
                                     
                     datetable = datetime(*time.strptime(et['eventenddate'][:19], "%Y-%m-%dT%H:%M:%S")[:6])
                     diff = datetable - date_now
-                    # # b = ((diff.total_seconds() /60) / 60)/24
                     print(diff)
-                    # a = diff.days * (-5)
                     et['total'] = et['total'] + (diff.days * (-5))
 
                     for ct in category_serializer :
@@ -471,13 +469,15 @@ def event_list(request):
         date_modified = datetime.now()
         data['createdate'] = date_modified
         data['bcapprove'] = ""
-        data['posterpic'] = ""
+        # data['posterpic'] = "555"
         data['updatedate'] = None
-        data['active'] = true
+        data['active'] = True
+        print(data)
         serializer = EventSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
 
@@ -521,11 +521,19 @@ def event_detail(request, pk):
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
+        data = JSONParser().parse(request)       
+        print("=================")
+        date_modified = datetime.now()
+        print(data)
+        # print(data['createby'])
+        data['updatedate'] = date_modified
+        print(data)
+
         serializer = EventSerializer(event, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
