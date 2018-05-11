@@ -23,6 +23,7 @@ class User(models.Model):
     age = models.IntegerField(validators=[MaxValueValidator(100)])
     active = models.BooleanField(default=True)
     categoryid = models.ManyToManyField(Category)       #edit
+    userpic = models.TextField()
 
 class Event(models.Model):
     topic = models.CharField(max_length=200)
