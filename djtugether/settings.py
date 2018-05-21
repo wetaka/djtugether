@@ -93,8 +93,8 @@ DATABASES = {
         'NAME': 'tugether',
         'USER': 'postgres',
         'PASSWORD': 'wetaka2539',
-        'HOST': '192.168.99.100',
-        # 'HOST': '192.168.1.11',
+        # 'HOST': '192.168.99.100',
+        'HOST': '10.148.0.2',
         'PORT': '5432',
     }
 }
