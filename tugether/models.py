@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
-
-# Create your models here.
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class Category(models.Model):
     
@@ -11,19 +11,19 @@ class Category(models.Model):
     #eventid = models.ManyToManyField(Event)
     active = models.BooleanField(default=True)
 
-class User(models.Model):
-    userid = models.CharField(max_length=20, primary_key=True)
-    firstname = models.CharField(max_length=30)
-    lastname = models.CharField(max_length=30)
-    major = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    nation = models.CharField(max_length=20)
-    title = models.CharField(max_length=20)
-    year = models.CharField(max_length=1)   
-    age = models.IntegerField(validators=[MaxValueValidator(100)])
-    active = models.BooleanField(default=True)
-    categoryid = models.ManyToManyField(Category)       #edit
-    userpic = models.TextField() 
+# class User(models.Model):
+#     userid = models.CharField(max_length=20, primary_key=True)
+#     firstname = models.CharField(max_length=30)
+#     lastname = models.CharField(max_length=30)
+#     major = models.CharField(max_length=100)
+#     department = models.CharField(max_length=100)
+#     nation = models.CharField(max_length=20)
+#     title = models.CharField(max_length=20)
+#     year = models.CharField(max_length=1)   
+#     age = models.IntegerField(validators=[MaxValueValidator(100)])
+#     active = models.BooleanField(default=True)
+#     categoryid = models.ManyToManyField(Category)       #edit
+#     userpic = models.TextField() 
 
 class Event(models.Model):
     topic = models.CharField(max_length=200)

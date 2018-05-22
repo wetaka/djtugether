@@ -38,7 +38,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'tuauth',
+    'fcm_django',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'tuauth.backend.TUOAuth2',
+)
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "[your api key]",
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": False,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": False,
+}
+
 
 FIXTURE_DIRS = [
     'fixtures',
@@ -83,21 +103,43 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djtugether.wsgi.application'
 
+SOCIAL_AUTH_TU_KEY = 'Qzw4Fnulqrb1Mswk9nYUEUi2rHOHeyKClwq2IM1X'
+SOCIAL_AUTH_TU_SECRET = 'OSwcfymQOUAG4AqIqe0ZlOR8PUR0V7KgXLaxpT9PLGLLoNO52CrBVEJMDd6g0ACtfLxOLnqFIuHxrH5Ie1L3cRE3TGCXlw35mNhEWXLSMiP94qd6d8X9VZECTi5uAgvO'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tugether',
-        'USER': 'postgres',
-        'PASSWORD': 'wetaka2539',
-        # 'HOST': '192.168.99.100',
-        'HOST': '10.148.0.2',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'tugether',
+#         'USER': 'postgres',
+#         'PASSWORD': 'wetaka2539',
+#         # 'HOST': 'localhost',
+#         'HOST': '192.168.99.100',
+#         # 'HOST': '10.148.0.2',
+#         'PORT': '5432',
+#     }
+# }
+
+SOCIAL_AUTH_PIPELINE = [ 
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+]
 
 
 # Password validation

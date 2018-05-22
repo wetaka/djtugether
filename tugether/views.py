@@ -12,8 +12,8 @@ import time
 # import datatime
 
 from django.db.models import Q
-
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your views here.
 
 @csrf_exempt
