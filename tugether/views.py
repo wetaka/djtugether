@@ -10,10 +10,10 @@ from rest_framework.parsers import JSONParser
 from datetime import datetime, date
 import time
 # import datatime
-
+import requests
 from django.db.models import Q
 from django.contrib.auth import get_user_model
-User = get_user_model()
+# User = get_user_model()
 # Create your views here.
 
 @csrf_exempt
@@ -69,10 +69,21 @@ def user_detail(request, pk):
 @csrf_exempt
 @parser_classes((JSONParser,))
 def check_login(request, userid):
-    if request.method == 'GET':
+    # print('---------------------------------')
+    # print(request.user.username)
+    # print('dawdawdwadwadwa awdaw awdaw dawd ')
+    # if request.method == 'GET':
+    #     user = request.user
+    #     print(user)
+    #     print(type(user))
+    #     serializer = UserSerializer(user)
+    #     return JsonResponse(serializer.data, status=200)
+        
         try:
             user = User.objects.get(userid=userid)
-            return HttpResponse(status=200)
+            # user = request.user
+            serializer = UserSerializer(user)
+            return HttpResponse(serializer.data)
         except User.DoesNotExist:
             return HttpResponse(status=404)
 
@@ -659,3 +670,42 @@ def category_detail(request, pk):
     elif request.method == 'DELETE':
         category.delete()
         return HttpResponse(status=204)
+
+
+@csrf_exempt
+@parser_classes((JSONParser,))
+def redirectURL(request) :
+    print('================== redirectURL ==================')
+    query_string = request.GET
+    code = query_string['code']
+    print(query_string)
+    print(' code   '+code)
+    # client_res = request.get('https://www.google.com/')
+    data = {
+        'code' : code,
+        'client_id' : 'Qzw4Fnulqrb1Mswk9nYUEUi2rHOHeyKClwq2IM1X',
+        'client_secret' : 'OSwcfymQOUAG4AqIqe0ZlOR8PUR0V7KgXLaxpT9PLGLLoNO52CrBVEJMDd6g0ACtfLxOLnqFIuHxrH5Ie1L3cRE3TGCXlw35mNhEWXLSMiP94qd6d8X9VZECTi5uAgvO' ,
+        'redirect_uri' : 'http://172.25.79.42:8000/api/redirect/tu/' ,
+        'grant_type' : 'authorization_code'
+    }
+
+    client_res = requests.post('https://api.tu.ac.th/o/token/' , data = data)
+    print('============client_res==============')
+    print(client_res.json())
+    # print(client_res.json()['access_token'])
+    # print(client_res.json())
+
+    # r= request.get('https://api.tu.ac.th')
+    # print('cookie', r.cookies)
+    # cookie = {'res_token' : client_res.json()['access_token']}
+    # new_cook = request.post('https://api.tu.ac.th/', cookie)    
+    # print('new_cook =>' )
+    # print(new_cook.cookies)
+
+    jar = requests.cookies.RequestsCookieJar()
+    jar.set('access_token', client_res.json() ['access_token'], domain='https://api.tu.ac.th', path='/')
+    r_cookie = requests.post('https://api.tu.ac.th', cookies=jar)
+
+    print('r_cookie.text', r_cookie)
+    return HttpResponse('<h1>success</h1>')
+    #return JsonResponse(client_res.json())

@@ -1,16 +1,16 @@
 from rest_framework import serializers
-from tugether.models import Event, Comment, Category ,Noti
+from tugether.models import Event, Comment, Category ,Noti,User
 from django.contrib.auth import get_user_model
 # from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
-User = get_user_model()
+# User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # fields = ('username', )
-        fields = ('__all__' )
+        # fields = ('__all__' )
         
-        # fields = ('userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active','categoryid','userpic' )
+        fields = ('userid', 'firstname', 'lastname', 'major','department','nation','title','year','age','active','categoryid','userpic' )
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

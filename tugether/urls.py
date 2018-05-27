@@ -25,4 +25,5 @@ urlpatterns = [
 
     path('category', views.category_list),
     path('category/<int:pk>', views.category_detail),
+    path('redirect/tu/', views.redirectURL), 
 ]
