@@ -824,7 +824,9 @@ def redirectURL(request) :
 
     print('r_cookie.text', r_cookie)
 
-    response = HttpResponse('<script>setTimeout(() => window.close(), 3000)</script> <h1>success</h1>')
+    # response = HttpResponse('<h1>success</h1> <script>setTimeout(() => window.close(), 3000)</script> <script>(function() { setTimeout(function() { window.close() }, 3000) })()</script>')
+    response = HttpResponse('<h1>success</h1>')
+    
     response.set_cookie('userid', r.json()['username'])
     return response
     #return JsonResponse(client_res.json())
