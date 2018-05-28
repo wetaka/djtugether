@@ -130,6 +130,8 @@ def get_join(request, eventid):
             print(user)
 
             user_serializer = UserSerializer(user, many=True)
+
+            return JsonResponse(user_serializer.data, safe=False)            
                      
         except Event.DoesNotExist:
             return HttpResponse(status=404)
