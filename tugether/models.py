@@ -15,15 +15,15 @@ class User(models.Model):
     userid = models.CharField(max_length=20, primary_key=True)
     firstname = models.CharField(max_length=30)
     lastname = models.CharField(max_length=30)
-    major = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    nation = models.CharField(max_length=20)
-    title = models.CharField(max_length=20)
-    year = models.CharField(max_length=1)   
-    age = models.IntegerField(validators=[MaxValueValidator(100)])
+    major = models.CharField(max_length=100 , blank=True, null=True)
+    department = models.CharField(max_length=100 , blank=True, null=True)
+    nation = models.CharField(max_length=20 , blank=True, null=True)
+    title = models.CharField(max_length=20 , blank=True, null=True)
+    year = models.CharField(max_length=1 , blank=True, null=True)   
+    age = models.IntegerField(validators=[MaxValueValidator(100)] , blank=True, null=True)
     active = models.BooleanField(default=True)
-    categoryid = models.ManyToManyField(Category)       #edit
-    userpic = models.TextField() 
+    categoryid = models.ManyToManyField(Category , default=[])       #edit
+    userpic = models.TextField(blank=True, null=True) 
 
 class Event(models.Model):
     topic = models.CharField(max_length=200)

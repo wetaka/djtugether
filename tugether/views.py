@@ -28,11 +28,15 @@ def user_list(request):
 
     elif request.method == 'POST':
         print('1. test: post request')
+        
         print(request)
         data = JSONParser().parse(request)
         print('2. test: post request')
-        print(data)
+        print(type(data))
+        # print(data)
         serializer = UserSerializer(data=data)
+        print("***********************************")
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
@@ -489,6 +493,8 @@ def event_list(request):
         serializer = EventSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+            print("serializer.data : =======================")
+            print(serializer.data)
             return JsonResponse(serializer.data, status=201)
         print(serializer.errors)
         return JsonResponse(serializer.errors, status=400)
@@ -674,6 +680,45 @@ def category_detail(request, pk):
         return HttpResponse(status=204)
 
 
+# @csrf_exempt
+# @parser_classes((JSONParser,))
+# def redirectURL(request) :
+#     print('================== redirectURL ==================')
+#     query_string = request.GET
+#     code = query_string['code']
+#     print(query_string)
+#     print(' code   '+code)
+#     # client_res = request.get('https://www.google.com/')
+#     data = {
+#         'code' : code,
+#         'client_id' : 'Qzw4Fnulqrb1Mswk9nYUEUi2rHOHeyKClwq2IM1X',
+#         'client_secret' : 'OSwcfymQOUAG4AqIqe0ZlOR8PUR0V7KgXLaxpT9PLGLLoNO52CrBVEJMDd6g0ACtfLxOLnqFIuHxrH5Ie1L3cRE3TGCXlw35mNhEWXLSMiP94qd6d8X9VZECTi5uAgvO' ,
+#         'redirect_uri' : 'http://172.25.79.42:8000/api/redirect/tu/' ,
+#         'grant_type' : 'authorization_code'
+#     }
+
+#     client_res = requests.post('https://api.tu.ac.th/o/token/' , data = data)
+#     print('============client_res==============')
+#     print(client_res.json())
+#     # print(client_res.json()['access_token'])
+#     # print(client_res.json())
+
+#     # r= request.get('https://api.tu.ac.th')
+#     # print('cookie', r.cookies)
+#     # cookie = {'res_token' : client_res.json()['access_token']}
+#     # new_cook = request.post('https://api.tu.ac.th/', cookie)    
+#     # print('new_cook =>' )
+#     # print(new_cook.cookies)
+
+#     jar = requests.cookies.RequestsCookieJar()
+#     jar.set('access_token', client_res.json() ['access_token'], domain='https://api.tu.ac.th', path='/')
+#     r_cookie = requests.post('https://api.tu.ac.th', cookies=jar)
+
+#     print('r_cookie.text', r_cookie)
+#     return HttpResponse('<h1>success</h1>')
+#     #return JsonResponse(client_res.json())
+
+
 @csrf_exempt
 @parser_classes((JSONParser,))
 def redirectURL(request) :
@@ -693,21 +738,93 @@ def redirectURL(request) :
 
     client_res = requests.post('https://api.tu.ac.th/o/token/' , data = data)
     print('============client_res==============')
+
     print(client_res.json())
     # print(client_res.json()['access_token'])
     # print(client_res.json())
 
     # r= request.get('https://api.tu.ac.th')
+    # r = requests.get('<MY_URI>', headers={'Authorization': 'TOK:<MY_TOKEN>'})
+    r = requests.get('https://api.tu.ac.th/api/me/', headers={'Authorization': 'Bearer '+ client_res.json()['access_token']})
+    print("test r :")
+    print(r)
+    print("test r.json :")
+    print(r.json())
+
+    # r = requests.get('https://api.tu.ac.th/api/me/', auth=('user', 'pass'))
     # print('cookie', r.cookies)
     # cookie = {'res_token' : client_res.json()['access_token']}
     # new_cook = request.post('https://api.tu.ac.th/', cookie)    
     # print('new_cook =>' )
     # print(new_cook.cookies)
+    print("Testtttttt")
+    print(r.json()['username'])
+    try:
+            user = User.objects.get(userid=r.json()['username'])
+            # user = request.user
+            print("Testtttttt Update data")
+            print(r.json()['username'])
+            
+            data = {
+                "userid" : r.json()['username'],
+                "firstname" : r.json()['firstname'],
+                "lastname" : r.json()['lastname'],
+                "major" : r.json()['company'],
+                "department" : r.json()["department"]
+            }
+            serializer = UserSerializer(user,data=data)
+
+            print("***********************************")
+            print(serializer)
+
+            if serializer.is_valid():
+                print("If Upadate ")
+                serializer.save()
+            else :
+                print("else Upadate ")
+                return HttpResponse('<h1> Not success Update</h1>')
+
+            # return HttpResponse(serializer.data)
+    except User.DoesNotExist:
+            # request.method == 'POST':
+            # print('1. test: post request')
+            # # print(request)
+            # print("Testtttttt")
+            print("Testtttttt Add New data")
+            
+            data = {
+                "userid" : r.json()['username'],
+                "firstname" : r.json()['firstname'],
+                "lastname" : r.json()['lastname'],
+                "major" : r.json()['company'],
+                "department" : r.json()["department"]
+            }
+            # data = JSONParser().parse(request)
+            # print('2. test: post request')
+            # print(data)
+            serializer = UserSerializer(data=data)
+            print("***********************************")
+            print(serializer)
+            if serializer.is_valid():
+                print("If Add New ")
+                
+                serializer.save()
+            else :
+                print("else Add New ")
+                
+                return HttpResponse('<h1> Not success Add New</h1>')
+
+    
 
     jar = requests.cookies.RequestsCookieJar()
     jar.set('access_token', client_res.json() ['access_token'], domain='https://api.tu.ac.th', path='/')
     r_cookie = requests.post('https://api.tu.ac.th', cookies=jar)
+    
+    
 
     print('r_cookie.text', r_cookie)
-    return HttpResponse('<h1>success</h1>')
+
+    response = HttpResponse('<script>setTimeout(() => window.close(), 3000)</script> <h1>success</h1>')
+    response.set_cookie('userid', r.json()['username'])
+    return response
     #return JsonResponse(client_res.json())
