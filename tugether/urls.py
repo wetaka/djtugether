@@ -9,7 +9,9 @@ urlpatterns = [
 
     path('event', views.event_list),
     path('event/<int:pk>', views.event_detail),
-    path('get-your-event/<str:userid>',views.get_yourevent),
+    path('get-your-event-approve/<str:userid>',views.get_yourevent),
+    path('get-your-event-waitapprove/<str:userid>',views.get_youreventwait),
+    
     path('get-join/<int:eventid>',views.get_join),
     path('search-event/<int:categoryid>',views.get_searchevent),
     path('upcoming-event/<str:userid>',views.get_upcomingevent),

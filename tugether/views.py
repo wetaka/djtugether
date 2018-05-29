@@ -97,7 +97,35 @@ def check_login(request, userid):
 def get_yourevent(request, userid):
     if request.method == 'GET':
         try:
-            event = Event.objects.all().filter(createby=userid)
+            event = Event.objects.all().filter(createby=userid, approve="2")
+            serializer = EventSerializer(event, many=True)                     
+
+            result = serializer.data    
+            max_size = len(result)
+            
+            query_string = request.GET
+            if 'st' in query_string  and 'ed' in query_string:
+                st = int(query_string['st'])
+                ed = int(query_string['ed'])
+                result = result[st : ed]
+            elif 'st' in query_string:
+                st = int(query_string['st'])
+                result = result[st:]
+            elif 'ed' in query_string:
+                ed = int(query_string['ed'])                
+                result = result[:ed]
+            
+            return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
+            
+        except Event.DoesNotExist:
+            return HttpResponse(status=404)
+
+@csrf_exempt
+@parser_classes((JSONParser,))
+def get_youreventwait(request, userid):
+    if request.method == 'GET':
+        try:
+            event = Event.objects.all().filter(createby=userid,approve="1")
             serializer = EventSerializer(event, many=True)                     
 
             result = serializer.data    
@@ -165,9 +193,9 @@ def get_searchevent(request, categoryid):
                 print(category)
 
                 if categoryid == 0 :
-                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now).distinct()
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now, approve="2").distinct()
                 else :   
-                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid).distinct()
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid, approve="2").distinct()
             
                 print(event)
 
@@ -208,9 +236,9 @@ def get_searchevent(request, categoryid):
             
             else :
                 if categoryid == 0 :
-                    event = Event.objects.all().filter(eventenddate__gt=date_now).distinct()
+                    event = Event.objects.all().filter(eventenddate__gt=date_now,approve="2").distinct()
                 else :   
-                    event = Event.objects.all().filter(eventenddate__gt=date_now, categoryid = categoryid).distinct()
+                    event = Event.objects.all().filter(eventenddate__gt=date_now, categoryid = categoryid, approve="2").distinct()
 
                 serializer = EventSerializer(event, many=True)
                 
@@ -252,8 +280,11 @@ def get_autoCompleteWords(request,word ,categoryid):
     print("DateTime jaaaaaaaaa ")
     if request.method == 'GET':
         try:
-            # query_string = request.GET          
-            date_now = datetime(2010,1,26,0,0,0)
+            # query_string = request.GET  
+            # datetime.now()        
+            # date_now = datetime(2010,1,26,0,0,0)
+            date_now = datetime.now()
+            
             date_modified = datetime.now()
             print(date_modified)
             print("DateTime jaaaaaaaaa ")
@@ -270,9 +301,9 @@ def get_autoCompleteWords(request,word ,categoryid):
             print(category)
 
             if categoryid == 0 :
-                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now).distinct()
+                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now,approve="2").distinct()
             else :   
-                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid).distinct()
+                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid,approve="2").distinct()
         
             print(event)
 
@@ -329,16 +360,19 @@ def get_upcomingevent(request, userid):
     print("DateTime jaaaaaaaaa ")
     if request.method == 'GET':
         try:
-            date_now = datetime(2000,10,26,0,0,0)
-            date_modified = datetime.now()
-            print(date_modified)
-            print("DateTime jaaaaaaaaa ")
-            print(date_modified)
+            # date_now = datetime(2000,10,26,0,0,0)
+            date_now = datetime.now()
+            
+            # date_modified = datetime.now()
+            # datetime.now()
+            # print(date_modified)
+            # print("DateTime jaaaaaaaaa ")
+            # print(date_modified)
             print("DateTime jaaaaaaaaa ")
             print(datetime(2000,1,1,0,0,0))
-            print("DateTime jaaaaaaaaa ")
+            # print("DateTime jaaaaaaaaa ")
 
-            event = Event.objects.all().filter(join__in=[userid] ,eventenddate__gt=date_now).distinct()
+            event = Event.objects.all().filter(join__in=[userid] ,eventenddate__gt=date_now, approve="2").distinct()
 
             print(event)
            
@@ -382,6 +416,7 @@ def get_upcomingevent(request, userid):
             return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
             
         except Event.DoesNotExist:
+            print(serializer.errors)
             return HttpResponse(status=404)
 
 @csrf_exempt
@@ -390,7 +425,8 @@ def get_pastevent(request, userid):
     print("DateTime jaaaaaaaaa ")
     if request.method == 'GET':
         try:
-            date_now = datetime(2020,10,26,0,0,0)
+            # date_now = datetime(2020,10,26,0,0,0)
+            date_now = datetime.now()
             date_modified = datetime.now()
             print(date_modified)
             print("DateTime jaaaaaaaaa ")
@@ -399,7 +435,7 @@ def get_pastevent(request, userid):
             print(datetime(2000,1,1,0,0,0))
             print("DateTime jaaaaaaaaa ")
         
-            event = Event.objects.all().filter(eventenddate__lt=date_now, join__in=[userid]).distinct()
+            event = Event.objects.all().filter(eventenddate__lt=date_now, join__in=[userid],approve="2").distinct()
 
             print(event)
 
@@ -477,7 +513,7 @@ def event_list(request):
     List all code event, or create a new event.
     """
     if request.method == 'GET':
-        event = Event.objects.all()
+        event = Event.objects.all().filter(approve="2")
         serializer = EventSerializer(event, many=True)  
         return JsonResponse(serializer.data, safe=False)
 
@@ -489,6 +525,7 @@ def event_list(request):
         # data['posterpic'] = "555"
         data['updatedate'] = None
         data['active'] = True
+        data['approve'] = "1"
         print(data)
         serializer = EventSerializer(data=data)
         if serializer.is_valid():
