@@ -11,7 +11,10 @@
       "title": "Miss",
       "age": 21,
       "year": "4",
-      "categoryid": [2,3],
+      "categoryid": [
+        2,
+        3
+      ],
       "active": true
     }
   },
@@ -27,7 +30,10 @@
       "title": "Miss",
       "age": 22,
       "year": "3",
-      "categoryid": [1,3],
+      "categoryid": [
+        1,
+        3
+      ],
       "active": true
     }
   },
@@ -35,54 +41,60 @@
     "model": "tugether.event",
     "pk": 1,
     "fields": {
-      "topic": "fam Freak Out football finny finny finny fam",
-      "posterpic": "l",
-      "createdate": "2018-03-26T04:03:01.559Z",
-      "createby": "5709650278",
-      "join": ["5709650179"],
-      "updatedate":"2018-03-26T04:03:01.559Z",
-      "eventstdate":"2018-03-26T04:03:01.559Z",
-      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "topic": "TU next startup Camp",
+      "posterpic": "https://firebasestorage.googleapis.com/v0/b/tugether-3fb8c.appspot.com/o/places%2Fff3c91e2-add4-4e73-a8f5-b8240f357641.jpg?alt=media&token=ff3c91e2-add4-4e73-a8f5-b8240f357641",
+      "createdate": "2018-07-01T04:03:01.559Z",
+      "createby": "5709650179",
+      "join": ["5709650278"],
+      "updatedate":null,
+      "eventstdate":"2018-07-21T08:00:00.559Z",
+      "eventenddate":"2018-07-23T04:03:01.559Z", 
       "active": true,
-      "limited": 300,
-      "location": "บร.5",
+      "limited": 100,
+      "location": "โรงแรมแกรนด์ โชเล่ พัทยา",
       "approve": "2",
       "bcapprove": "",
-      "description": "fam งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ freak finny finny",
-      "facebook": "Freakout page",
+      "description": "ค่ายที่จะนำนักศึกษาธรรมศาสตร์สู่การเริ่มต้นเป็นผู้ประกอบการ startup",
+      "facebook": "tuipitu",
       "line": "",
       "web": "",
-      "phone": "",
-      "hashtag": "#Stageplay #ละครเวที #few ",
-      "categoryid": [3,5]
-
+      "phone": "025644440 ต่อ 1664-5",
+      "hashtag": "#startup#ผู้นำ#CAMP#ค่าย",
+      "categoryid": [
+        5,
+        10,
+        12
+      ]
     }
   },
- 
+
   {
     "model": "tugether.event",
     "pk": 2,
     "fields": {
-      "topic": "CU-TU  freak traditional football finny",
-      "posterpic": "l",
-      "createdate": "2018-03-26T04:03:01.559Z",
-      "createby": "5709650278",
-      "join": ["5709650179"],
-      "updatedate":"2018-03-26T04:03:01.559Z",
-      "eventstdate":"2018-03-26T04:03:01.559Z",
-      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "topic": "volunteer land แดนอาสาสนุก",
+      "posterpic": "https://firebasestorage.googleapis.com/v0/b/tugether-3fb8c.appspot.com/o/places%2Fb2da8516-16f2-47fb-8549-5afd2360e7b7.jpg?alt=media&token=b2da8516-16f2-47fb-8549-5afd2360e7b7",
+      "createdate": "2017-11-09T04:03:01.559Z",
+      "createby": "5709650179",
+      "join": ["5709650278"],
+      "updatedate":null,
+      "eventstdate":"2018-11-13T17:00:00.559Z",
+      "eventenddate":"2018-11-13T04:03:01.559Z", 
       "active": true,
-      "limited": 4000,
-      "location": "สนามศุภชลาศัย",
+      "limited": 200,
+      "location": "ตรงข้าม INTERZONE",
       "approve": "2",
       "bcapprove": "",
-      "description": "fam fam งานฟุตบอลประเพณี ค่าบัตรราคา 100,200,400 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ freak",
-      "facebook": "CUTU football",
+      "description": "มาร่วมผจญภัยในดินแดนอาสา เพื่อค้นหาความสุขจากการให้ แล้วคุณจะรู้ว่าจิตอาสาสนุกกว่าที่คุณคิด",
+      "facebook": "",
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#cututraditional #football #ฟุตบอลประเพณี #few",
-      "categoryid": [2,3]
+      "hashtag": "#volunteer #อาสาสมัคร#จิตอาสา#",
+      "categoryid": [
+        10,
+        11
+      ]
     }
   },
 
@@ -90,30 +102,64 @@
     "model": "tugether.event",
     "pk": 3,
     "fields": {
-      "topic": "Freak Test Load Out freak",
-      "posterpic": "l",
-      "createdate": "2018-03-26T04:03:01.559Z",
-      "createby": "5709650179",
-      "join": ["5709650278"],
-      "updatedate":"2018-03-26T04:03:01.559Z",
-      "eventstdate":"2018-03-26T04:03:01.559Z",
-      "eventenddate":"2018-03-26T04:03:01.559Z", 
+      "topic": "จอมเวทย์นักวิทย์พิชิตจอมมาร",
+      "posterpic": "https://firebasestorage.googleapis.com/v0/b/tugether-3fb8c.appspot.com/o/places%2Fcf2584e7-d62e-446a-84a9-2f2675c27805.jpg?alt=media&token=cf2584e7-d62e-446a-84a9-2f2675c27805",
+      "createdate": "2018-08-24T04:03:01.559Z",
+      "createby": "5709650278",
+      "join": ["5709650179"],
+      "updatedate":null,
+      "eventstdate":"2018-08-21T00:00:00.559Z",
+      "eventenddate":"2018-08-24T00:00:00.559Z", 
       "active": true,
-      "limited": 300,
-      "location": "บร.5",
+      "limited": 40,
+      "location": "ศูนย์อาสาสมัครตึกกิจกรรมนักศึกษา มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต",
       "approve": "2",
       "bcapprove": "",
-      "description": "งานละครเวที ค่าบัตรราคา 100,250,350 บาท ซื้อบัตรได้ที่ศูนย์หนังสือธรรมศาสตร์ football",
-      "facebook": "Freakout page",
+      "description": "เข้าร่วมงานวันวิทยาศาสตร์ ให้นักเวทย์รุ่นจิ๋วระดับประถมศึกษา ณ วัดบางกุฎีทอง",
+      "facebook": "",
       "line": "",
       "web": "",
       "phone": "",
-      "hashtag": "#Stageplay #ละครเวที",
-      "categoryid": [3,5]
-
+      "hashtag": "#วิทยาศาสตร์#นักเวทย์รุ่นจิ๋ว#จอมเวทย์อาสา",
+      "categoryid": [
+        6,
+        11,
+        12
+      ]
     }
   },
 
+  {
+    "model": "tugether.event",
+    "pk": 4,
+    "fields": {
+      "topic": "เปิดรับอาสาสมัครSTAFF สวัสดิการและช่างภาพ ประจำงาน PRE-TU'60",
+      "posterpic": "https://firebasestorage.googleapis.com/v0/b/tugether-3fb8c.appspot.com/o/places%2F39a419e6-d6e1-45ce-ae29-37b21f8b17fb.jpg?alt=media&token=39a419e6-d6e1-45ce-ae29-37b21f8b17fb",
+      "createdate": "2017-07-26T04:03:01.559Z",
+      "createby": "5709650278",
+      "join": [
+        "5709650179"
+      ],
+      "updatedate": null,
+      "eventstdate": "2017-07-26T18:00:00.559Z",
+      "eventenddate": "2017-07-27T17:00:00.559Z",
+      "active": true,
+      "limited": 50,
+      "location": "ศูนย์อาสาสมัคร ตึกกิจกรรมนักศึกษา มธ.ศูนย์รังสิต",
+      "approve": "2",
+      "bcapprove": "",
+      "description": "นักศึกษาปีที่ 2 ขึ้นไป คุณสมบัติช่างภาพต้องมีมีทักษะถ่ายภาพนิ่งหรือวิดีโอ และมีกล้องเป็นของตัวเอง",
+      "facebook": "",
+      "line": "",
+      "web": "",
+      "phone": "0634848588",
+      "hashtag": "#อาสาสมัคร#STAFF#ช่างภาพ",
+      "categoryid": [
+        11,
+        12
+      ]
+    }
+  },
   {
     "model": "tugether.category",
     "pk": 1,
@@ -121,7 +167,6 @@
       "categoryname": "Arts and crafts",
       "categorydetails": "การฝีมือและศิลปหัตถกรรม",
       "active": true
-     
     }
   },
   {
@@ -131,7 +176,6 @@
       "categoryname": "Games, sport and track and field’s",
       "categorydetails": "เกมส์ กีฬา และกรีฑา",
       "active": true
-      
     }
   },
   {
