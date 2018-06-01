@@ -178,7 +178,8 @@ def get_searchevent(request, categoryid):
         try:
             query_string = request.GET
 
-            date_now = datetime(2010,1,26,0,0,0)
+            # date_now = datetime(2010,1,26,0,0,0)
+            date_now = datetime.now()
             date_modified = datetime.now()
             print(date_modified)
             print("DateTime jaaaaaaaaa ")
@@ -861,8 +862,8 @@ def redirectURL(request) :
 
     print('r_cookie.text', r_cookie)
 
-    # response = HttpResponse('<h1>success</h1> <script>setTimeout(() => window.close(), 3000)</script> <script>(function() { setTimeout(function() { window.close() }, 3000) })()</script>')
-    response = HttpResponse('<h1>success</h1>')
+    response = HttpResponse('<h1>success</h1> <script>setTimeout(() => window.close(), 3000)</script> <script>(function() { setTimeout(function() { window.close() }, 3000) })()</script>')
+    # response = HttpResponse('<h1>success</h1>')
     
     response.set_cookie('userid', r.json()['username'])
     return response

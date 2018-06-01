@@ -1,0 +1,32 @@
+[
+  {
+      "model": "tugether.user",
+      "pk": "5709650278",
+      "fields": {
+        "firstname": "Wetaka",
+        "lastname": "Wasakornkhajonyot",
+        "major": "Computer Science",
+        "department": "Science and Technology",
+        "nation": "Thai",
+        "title": "Miss",
+        "age": 21,
+        "year": "4",
+        "active": true
+      }
+    },
+    {
+      "model": "tugether.user",
+      "pk": "5709650179",
+      "fields": {
+        "firstname": "Phatwarintara",
+        "lastname": "Wongchathong",
+        "major": "Math",
+        "department": "Science and Technology",
+        "nation": "Thai",
+        "title": "Miss",
+        "age": 22,
+        "year": "3",
+        "active": true
+      }
+    }
+]
