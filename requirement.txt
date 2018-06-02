@@ -1,0 +1,9 @@
+Django==2.0.0
+psycopg2==2.4.5
+djangorestframework===3.8.2
+django-bower===5.2.0
+fcm-django===0.2.19
+django-filter===1.1.0
+social-auth-app-django===2.1.0
+fcm-django===0.2.19
+django-scheduler===0.8.7
