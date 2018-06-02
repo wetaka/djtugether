@@ -316,9 +316,9 @@ def get_autoCompleteWords(request,word ,categoryid):
             print(category)
 
             if categoryid == 0 :
-                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now,approve="2").distinct()
+                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,approve="2").distinct()
             else :   
-                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid,approve="2").distinct()
+                event = Event.objects.all().filter(Q(topic__icontains=word) | Q(hashtag__icontains=word) | Q(description__icontains=word) | Q(categoryid__in=list(category)) , categoryid = categoryid,approve="2").distinct()
         
             print(event)
 
@@ -791,7 +791,7 @@ def redirectURL(request) :
         'code' : code,
         'client_id' : 'Qzw4Fnulqrb1Mswk9nYUEUi2rHOHeyKClwq2IM1X',
         'client_secret' : 'OSwcfymQOUAG4AqIqe0ZlOR8PUR0V7KgXLaxpT9PLGLLoNO52CrBVEJMDd6g0ACtfLxOLnqFIuHxrH5Ie1L3cRE3TGCXlw35mNhEWXLSMiP94qd6d8X9VZECTi5uAgvO' ,
-        'redirect_uri' : 'http://172.25.79.42:8000/api/redirect/tu/' ,
+        'redirect_uri' : 'http://192.168.1.6:8000/api/redirect/tu/' ,
         'grant_type' : 'authorization_code'
     }
 
