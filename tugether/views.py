@@ -177,7 +177,8 @@ def get_searchevent(request, categoryid):
     if request.method == 'GET':
         try:
             query_string = request.GET
-
+            print("Input")
+            print(query_string)
             # date_now = datetime(2010,1,26,0,0,0)
             date_now = datetime.now()
             date_modified = datetime.now()
@@ -187,30 +188,40 @@ def get_searchevent(request, categoryid):
             print("DateTime jaaaaaaaaa ")
             print(datetime(2000,1,1,0,0,0))
             print("DateTime jaaaaaaaaa ")
+
+            # print()
             
             if 'searchword' in query_string :
                 searchword = query_string['searchword']
-                category = Category.objects.all().filter(categoryname__icontains=searchword ).values_list('pk', flat=True)
+                category = Category.objects.all().values_list('pk', flat=True)
                 print(category)
 
                 if categoryid == 0 :
-                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now, approve="2").distinct()
+                    print('cate =============.====================================')
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword), approve="2").distinct()
                 else :   
-                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword) | Q(description__icontains=searchword) | Q(categoryid__in=list(category)) ,eventenddate__gt=date_now , categoryid = categoryid, approve="2").distinct()
+                    event = Event.objects.all().filter(Q(topic__icontains=searchword) | Q(hashtag__icontains=searchword), categoryid = categoryid, approve="2").distinct()
             
                 print(event)
 
                 serializer = EventSerializer(event, many=True)
                 category_serializer = list(category)
+                print('result ============================================')
                 print(serializer.data)
                 print(category_serializer)
                 # print(category)
                 for et in serializer.data :
                     et['total'] = 0
+                    if et['topic'] is None :
+                        et['topic'] = ''
+                    if et['description'] is None:
+                        et['description'] = ''
+                    if et['hashtag'] is None:
+                        et['hashtag'] = ''
 
                     if et['topic'].find(searchword) != -1 :
                         et['total'] = et['total'] + 100
-
+                    
                     etsplit = et['hashtag'].split('#')
                     for  sp in etsplit :
                         if sp.find(searchword) != -1 :
@@ -269,6 +280,9 @@ def get_searchevent(request, categoryid):
             elif 'ed' in query_string:
                 ed = int(query_string['ed'])                
                 result = result[:ed]
+
+            print("Output")
+            print(result)
             
             return JsonResponse({ "max_size": max_size, "data": result }, safe=False)
         except Event.DoesNotExist:
@@ -318,6 +332,13 @@ def get_autoCompleteWords(request,word ,categoryid):
 
             for et in serializer.data :
                 # et['total'] = 0
+                if et['topic'] is None :
+                    et['topic'] = ''
+                if et['description'] is None:
+                    et['description'] = ''
+                if et['hashtag'] is None:
+                    et['hashtag'] = ''
+                
                 allstr = et['topic']+" "+et['description']+" "+et['hashtag']
                 splitwords = allstr.split(" ")
 
