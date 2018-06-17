@@ -791,7 +791,7 @@ def redirectURL(request) :
         'code' : code,
         'client_id' : 'Qzw4Fnulqrb1Mswk9nYUEUi2rHOHeyKClwq2IM1X',
         'client_secret' : 'OSwcfymQOUAG4AqIqe0ZlOR8PUR0V7KgXLaxpT9PLGLLoNO52CrBVEJMDd6g0ACtfLxOLnqFIuHxrH5Ie1L3cRE3TGCXlw35mNhEWXLSMiP94qd6d8X9VZECTi5uAgvO' ,
-        'redirect_uri' : 'http://192.168.1.6:8000/api/redirect/tu/' ,
+        'redirect_uri' : 'http://10.75.72.7:8000/api/redirect/tu/' ,
         'grant_type' : 'authorization_code'
     }
 
